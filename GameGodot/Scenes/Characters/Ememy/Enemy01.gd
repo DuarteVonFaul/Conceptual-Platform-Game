@@ -8,6 +8,7 @@ func Main():
 	GRAVIDADE = -2000
 	UP = Vector2(0,-1)
 	direcao_entrada.x = -1
+	direcao_visao_direita = true
 	
 	pass
 

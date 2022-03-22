@@ -41,7 +41,6 @@ region_rect = Rect2( -0.01, 159.879, 160, 145 )
 position = Vector2( -145, 267 )
 
 [node name="Mobes_explosivos" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Enemy3" parent="Mobes_explosivos" instance=ExtResource( 4 )]
 position = Vector2( 596, 195 )
@@ -56,7 +55,6 @@ position = Vector2( 319, 194 )
 scale = Vector2( 0.496088, 1.99084 )
 
 [node name="Mobes_plataforma" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Enemy2" parent="Mobes_plataforma" instance=ExtResource( 5 )]
 position = Vector2( 1650, 151 )
