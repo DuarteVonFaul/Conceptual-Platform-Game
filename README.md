@@ -21,7 +21,7 @@ https://user-images.githubusercontent.com/50261190/159541269-b5b75fde-4541-4e84-
 
 
 
-## Como Implementar um novo Personagem
+## 4. Como Implementar um novo Personagem
 
 Para construir um novo pensonagem basta organizar dentro da seguinte estrutura
 
@@ -62,10 +62,10 @@ Existe algumas funcionalidades internas que podem ser chamadas como:
 - permissao_segundo_pulo => caso esteja em True o player tem permissão de dar pulo duplo
 
 
-## 4. Arte:
+## 5. Arte:
 
 As artes usadas podem ser facilmente encontradas no [Link do Artista](https://opengameart.org/content/arcade-platformer-assets)
 
-## 5. Autores:
+## 6. Autores:
   
 - **Guilherme Duarte Sousa** - [Linkedin](https://www.linkedin.com/in/guilherme-duarte-sousa-53639822b/) | [Github](https://github.com/DuarteVonFaul/) | [Facebook](https://www.facebook.com/DuarteVonFaul/)
