@@ -2,34 +2,34 @@ extends "res://Scripts/generics/mecanica.gd"
 
 func Main():
 	
-	ACELERACAO = 300
-	VEL_MAXIMA = 600
-	VEL_MINIMA = 30
-	GRAVIDADE = -2000
+	acceleration = 300
+	velocityMax = 600
+	velocityMin = 30
+	GRAVITY = -2000
 	UP = Vector2(0,-1)
-	direcao_entrada.x = -1
+	entryDir.x = -1
 	
 	pass
 
 func On_Input_Event():
 	
 	if is_on_wall():
-		direcao_entrada.x = -direcao_entrada.x
+		entryDir.x = -entryDir.x
 	
 	pass
 
 
 func animation():
 	
-	var animacao = ""
-	var animacao_atual = ""
+	var anim = ""
+	var currentAnim = ""
 	
-	if status ==  lista_status[1]:
-		animacao = "walk"
+	if getStatus() ==  statusList[1]:
+		anim = "walk"
 	
-	if animacao != animacao_atual:
-		animacao_atual = animacao
-		$Animation.play(animacao_atual)
+	if anim != currentAnim:
+		currentAnim = anim
+		$Animation.play(currentAnim)
 	
 	
 	pass
