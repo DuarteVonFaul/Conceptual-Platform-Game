@@ -8,7 +8,7 @@ func Main():
 	GRAVITY = -2000
 	UP = Vector2(0,-1)
 	entryDir.x = -1
-	
+
 	pass
 
 func On_Input_Event():
