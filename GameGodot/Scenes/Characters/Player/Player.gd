@@ -1,17 +1,17 @@
 extends "res://Scripts/generics/mecanica.gd"
 
-var lista_animacao = ["walk", "Idle", "jump_down", "jump_up"]
+var animList = ["walk", "Idle", "jump_down", "jump_up"]
 
 # Called when the node enters the scene tree for the first time.
 
 func Main():
 	add_to_group("Player")
-	ACELERACAO = 300
-	VEL_MAXIMA = 600
-	VEL_MINIMA = 100
-	GRAVIDADE = -2000
-	forca_pulo = 700
-	forca_pulo_duplo = 700
+	acceleration = 300
+	velocityMax = 600
+	velocityMin = 100
+	GRAVITY = -2000
+	jumpingForce = 700
+	secondJumpingForce = 700
 	UP = Vector2(0,-1)
 	
 	
@@ -22,7 +22,7 @@ func Main():
 func On_Input_Event():
 	
 	
-	direcao_entrada.x = float(Input.is_action_pressed("ui_right")) - float(Input.is_action_pressed("ui_left")) 
+	entryDir.x = float(Input.is_action_pressed("ui_right")) - float(Input.is_action_pressed("ui_left")) 
 	
 	##if Input.is_action_pressed("ui_right"):
 	##	direcao_entrada.x = 1
@@ -34,7 +34,7 @@ func On_Input_Event():
 	##	direcao_entrada.x = 0
 	##	pass
 	
-	direcao_entrada.y = - float(Input.is_action_pressed("ui_up"))
+	entryDir.y = - float(Input.is_action_pressed("ui_up"))
 	
 	#if Input.is_action_pressed("ui_up"):
 	#	direcao_entrada.y = -1
@@ -45,34 +45,34 @@ func On_Input_Event():
 
 func animation():
 	
-	var animacao = ""
-	var animacao_atual = ""
+	var anim = ""
+	var currentAnim = ""
 	
-	if chao == true and pre_chao == false:
-		animacao = "floor"
-	elif direcao_entrada.y == -1 and chao == true:
-		animacao = "jump"
+	if Floor == true and beFloor == false:
+		anim = "floor"
+	elif entryDir.y == -1 and Floor == true:
+		anim = "jump"
 	
-	if animacao != animacao_atual:
-		animacao_atual = animacao
-		$SFX.play(animacao_atual)
+	if anim != currentAnim:
+		currentAnim = anim
+		$SFX.play(currentAnim)
 	
-	if status == lista_status[0]:
-		animacao = lista_animacao[1]
+	if getStatus() == statusList[0]:
+		anim = animList[1]
 		pass
-	elif status == lista_status[1]:
-		animacao = lista_animacao[0]
+	elif getStatus() == statusList[1]:
+		anim = animList[0]
 		pass
-	elif status == lista_status[2]:
-		animacao = lista_animacao[3]
+	elif getStatus() == statusList[2]:
+		anim = animList[3]
 		pass
-	elif status == lista_status[3]:
-		animacao = lista_animacao[2]
+	elif getStatus() == statusList[3]:
+		anim = animList[2]
 		pass
 	
-	if animacao != animacao_atual:
-		animacao_atual = animacao
-		$Animation.play(animacao_atual)
+	if anim != currentAnim:
+		currentAnim = anim
+		$Animation.play(currentAnim)
 	
 	
 	pass

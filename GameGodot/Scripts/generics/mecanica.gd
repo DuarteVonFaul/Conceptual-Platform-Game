@@ -1,30 +1,30 @@
 extends KinematicBody2D
 #Variaveis de controle de mecanica/Fisica
-var ACELERACAO = 0
-var VEL_MAXIMA = 0
-var VEL_MINIMA = 0
-var GRAVIDADE = 0
+var acceleration = 0
+var velocityMax = 0
+var velocityMin = 0
+var GRAVITY = 0
 var UP = Vector2()
-var forca_pulo = 0
-var forca_pulo_duplo = 0
+var jumpingForce = 0
+var secondJumpingForce = 0
 
 #Variaveis de controle/permissao de funcionabilidade
-export var direcao_visao_direita = false; 
-export var pulo_duplo = false
+export var visionDIR = false; 
+export var permissionSecondJump = false
 
 #Variaveis de controle de Direção e movimento
-var vel = 0
-var direcao_entrada = Vector2()
-var direcao_atual = Vector2()
+var velocity = 0
+var entryDir = Vector2()
+var currentDir = Vector2()
 var move = Vector2()
-var gravidade = 0
+var gravity = 0
 
 #Variaveis de Status do personagem
-var lista_status = ["Parado", "Andando", "Pulando", "Caindo"]
+var statusList = ["Parado", "Andando", "Pulando", "Caindo"]
 
-var permissao_segundo_pulo = true
-var chao = true
-var pre_chao = false
+var statusSecondJump = true
+var Floor = true
+var beFloor = false
 var status = ""
 
 #Metodo Principal, que sera o primeiro a ser chamado no codigo
@@ -38,29 +38,29 @@ func _ready():
 #Metodo de controle do Status do Personagem
 func status():
 	
-	if chao and direcao_entrada.x != 0:
-		status = lista_status[1]
+	if Floor and entryDir.x != 0:
+		status = statusList[1]
 		
-	elif chao and direcao_entrada.x == 0 and vel == 0:
-		status = lista_status[0]
+	elif Floor and entryDir.x == 0 and velocity == 0:
+		status = statusList[0]
 		
-	elif !chao and gravidade > 0:
-		status = lista_status[2]
+	elif !Floor and gravity > 0:
+		status = statusList[2]
 		
-	elif !chao and gravidade < 0:
-		status = lista_status[3]
+	elif !Floor and gravity < 0:
+		status = statusList[3]
 
 #Metodo de controle de movimentação Horizontal
 func move_x():
 	
-	if direcao_entrada.x == 1:
-		$body.set_flip_h(direcao_visao_direita)
+	if entryDir.x == 1:
+		$body.set_flip_h(visionDIR)
 		pass
-	elif direcao_entrada.x == -1:
-		$body.set_flip_h(!direcao_visao_direita)
+	elif entryDir.x == -1:
+		$body.set_flip_h(!visionDIR)
 		pass
 	
-	direcao_atual.x = direcao_entrada.x
+	currentDir.x = entryDir.x
 	
 	pass
 
@@ -68,17 +68,17 @@ func move_x():
 #Metodo de controle de movimentação vertical
 func move_y():
 	
-	if direcao_entrada.y == -1 and chao:
-		jump(forca_pulo)
-	elif pulo_duplo == true:
-		if permissao_segundo_pulo == true and direcao_entrada.y == -1:
-			jump(forca_pulo_duplo)
-			permissao_segundo_pulo = false
+	if entryDir.y == -1 and Floor:
+		jump(jumpingForce)
+	elif entryDir.y == -1 and permissionSecondJump == true:
+		if statusSecondJump == false:
+			jump(secondJumpingForce)
+			statusSecondJump = true
 	pass
 
 #Metodo de pulo
 func jump(valor):
-	gravidade = valor
+	gravity = valor
 	pass
 
 #Metodo de processo circular/60fps
@@ -88,26 +88,27 @@ func _physics_process(delta):
 	move_x()
 	move_y()
 	status()
-	chao = is_on_floor()
+	Floor = is_on_floor()
 	animation()
 	
 	
 	
 	
-	if chao == true and pre_chao == true and direcao_entrada.y == 0:
-		permissao_segundo_pulo = true
-		gravidade = -30
+	if Floor == true and beFloor == true and entryDir.y == 0:
+		statusSecondJump = false
+		gravity = -30
 	elif is_on_ceiling():
-		gravidade = 0
-		gravidade += GRAVIDADE * delta
+		gravity = 0
+		gravity += GRAVITY * delta
 	else:
-		gravidade += GRAVIDADE * delta
+		gravity += GRAVITY * delta
+	
 	
 	if UP.y != 0:
-		move = Vector2(VEL_MINIMA * direcao_entrada.x, UP.y * gravidade)
+		move = Vector2(velocityMin * entryDir.x, UP.y * gravity)
 		pass
 	elif UP.x != 0:
-		move = Vector2(UP.x * gravidade,VEL_MINIMA * direcao_entrada.x)
+		move = Vector2(UP.x * gravity,velocityMin * entryDir.x)
 		pass
 	
 	
@@ -119,8 +120,41 @@ func _physics_process(delta):
 	
 	
 	
-	pre_chao = chao
+	beFloor = Floor
 	
+
+
+
+func getStatus():
+	return status
+
+
+func getFloor():
+	return Floor
+
+func getBeFloor():
+	return beFloor
+
+func setStatusSecondJump(valor):
+	statusSecondJump = valor
+
+func getStatusSecondJump():
+	return statusSecondJump
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

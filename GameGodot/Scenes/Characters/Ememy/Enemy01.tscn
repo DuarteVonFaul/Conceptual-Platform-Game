@@ -55,6 +55,7 @@ extents = Vector2( 7, 8 )
 
 [node name="Enemy01" type="KinematicBody2D"]
 script = ExtResource( 1 )
+visionDIR = true
 
 [node name="body" type="Sprite" parent="."]
 texture = ExtResource( 2 )

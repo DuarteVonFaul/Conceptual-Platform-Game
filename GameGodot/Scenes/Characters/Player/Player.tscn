@@ -119,7 +119,6 @@ anims/walk = SubResource( 5 )
 current = true
 zoom = Vector2( 2, 2 )
 process_mode = 0
-drag_margin_h_enabled = false
 drag_margin_left = 0.3
 drag_margin_top = 0.5
 drag_margin_right = 0.3
