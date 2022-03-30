@@ -38,7 +38,7 @@ region_enabled = true
 region_rect = Rect2( -0.01, 159.879, 160, 145 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( -145, 267 )
+position = Vector2( 2442.01, 115.302 )
 
 [node name="Mobes_explosivos" type="Node" parent="."]
 

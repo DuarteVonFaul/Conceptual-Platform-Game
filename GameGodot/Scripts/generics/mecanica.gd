@@ -1,6 +1,7 @@
 extends KinematicBody2D
 #Variaveis de controle de mecanica/Fisica
 var acceleration = 0
+var slowdown = 0
 var velocityMax = 0
 var velocityMin = 0
 var GRAVITY = 0
@@ -11,9 +12,11 @@ var secondJumpingForce = 0
 #Variaveis de controle/permissao de funcionabilidade
 export var visionDIR = false; 
 export var permissionSecondJump = false
+export var permissionAutoFlip = true
 
 #Variaveis de controle de Direção e movimento
 var velocity = 0
+var targetVelocity = 0
 var entryDir = Vector2()
 var currentDir = Vector2()
 var move = Vector2()
@@ -51,16 +54,30 @@ func status():
 		status = statusList[3]
 
 #Metodo de controle de movimentação Horizontal
-func move_x():
-	
-	if entryDir.x == 1:
-		$body.set_flip_h(visionDIR)
-		pass
-	elif entryDir.x == -1:
-		$body.set_flip_h(!visionDIR)
-		pass
-	
-	currentDir.x = entryDir.x
+func move_x(delta):
+	if permissionAutoFlip:
+		if entryDir.x == 1:
+			$body.set_flip_h(visionDIR)
+			pass
+		elif entryDir.x == -1:
+			$body.set_flip_h(!visionDIR)
+			pass
+	if acceleration == 0:
+		currentDir.x = entryDir.x
+		velocity = currentDir.x * velocityMin
+	else:
+		if entryDir.x != 0:
+			currentDir.x = entryDir.x
+			if targetVelocity != velocityMax:
+				targetVelocity = velocityMax
+		else:
+			targetVelocity = 0
+		
+		var variation = slowdown * delta
+		if(entryDir.x != 0):
+			variation = acceleration * delta
+		velocity = interpolacaoLinear(velocity,targetVelocity * entryDir.x,variation)
+		
 	
 	pass
 
@@ -81,11 +98,29 @@ func jump(valor):
 	gravity = valor
 	pass
 
+
+func interpolacaoLinear(currentVelocity, targetVelocity, variation):
+	var dif = targetVelocity - currentVelocity
+	
+	if dif > variation:
+		return currentVelocity + variation
+	
+	if dif < -variation:
+		return currentVelocity - variation
+	
+	return targetVelocity
+
+
+
+
+
+
+
 #Metodo de processo circular/60fps
 func _physics_process(delta):
 	
 	On_Input_Event()
-	move_x()
+	move_x(delta)
 	move_y()
 	status()
 	Floor = is_on_floor()
@@ -105,10 +140,10 @@ func _physics_process(delta):
 	
 	
 	if UP.y != 0:
-		move = Vector2(velocityMin * entryDir.x, UP.y * gravity)
+		move = Vector2(velocity, UP.y * gravity)
 		pass
 	elif UP.x != 0:
-		move = Vector2(UP.x * gravity,velocityMin * entryDir.x)
+		move = Vector2(UP.x * gravity,velocity)
 		pass
 	
 	
@@ -140,6 +175,9 @@ func setStatusSecondJump(valor):
 
 func getStatusSecondJump():
 	return statusSecondJump
+
+func setTargetVelocity(valor):
+	targetVelocity = valor
 
 
 

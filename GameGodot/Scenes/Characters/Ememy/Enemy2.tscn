@@ -1,7 +1,38 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Characters/Ememy/Enemy2.gd" type="Script" id=1]
-[ext_resource path="res://Sprite/sprites.png" type="Texture" id=2]
+[ext_resource path="res://Sprite/mob/01.png" type="Texture" id=2]
+[ext_resource path="res://Sprite/mob/02.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=3]
+resource_name = "01"
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "02"
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "walk"
@@ -17,10 +48,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Rect2( 96, 0, 16, 16 ), Rect2( 112, 0, 16, 16 ) ]
+"values": [ Rect2( 0, 0, 16, 16 ), Rect2( 16, 0, 16, 16 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:scale")
+tracks/1/path = NodePath("sprite:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -29,32 +60,32 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.8, 1.2 ), Vector2( 1.1, 0.8 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 0.7 ) ]
 }
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 7.65986, 5.03469 )
+extents = Vector2( 7.65986, 5.28917 )
 
 [node name="Enemy2" type="KinematicBody2D"]
 position = Vector2( 5, 0 )
 scale = Vector2( 0.8, 1.2 )
 script = ExtResource( 1 )
+permissionAutoFlip = false
+
+[node name="SpriteControl" type="AnimationPlayer" parent="."]
+anims/01 = SubResource( 3 )
+anims/02 = SubResource( 4 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/walk = SubResource( 1 )
 
-[node name="body" type="Sprite" parent="."]
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 8, -7 )
-enabled = true
-cast_to = Vector2( 0, 25 )
-
 [node name="sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+position = Vector2( -0.194687, 7.75657 )
+texture = ExtResource( 3 )
+offset = Vector2( 0.16224, -7.75657 )
 region_enabled = true
-region_rect = Rect2( 96, 0, 16, 16 )
+region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2.53469 )
+position = Vector2( 0.0707054, 1.02638 )
 shape = SubResource( 2 )

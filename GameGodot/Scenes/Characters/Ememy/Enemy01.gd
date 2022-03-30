@@ -2,7 +2,6 @@ extends "res://Scripts/generics/mecanica.gd"
 
 func Main():
 	
-	acceleration = 300
 	velocityMax = 600
 	velocityMin = 30
 	GRAVITY = -2000

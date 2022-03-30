@@ -6,8 +6,9 @@ var animList = ["walk", "Idle", "jump_down", "jump_up"]
 
 func Main():
 	add_to_group("Player")
-	acceleration = 300
-	velocityMax = 600
+	acceleration = 400
+	slowdown = 300
+	velocityMax = 300
 	velocityMin = 100
 	GRAVITY = -2000
 	jumpingForce = 700
