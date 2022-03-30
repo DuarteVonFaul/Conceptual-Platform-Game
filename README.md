@@ -23,21 +23,18 @@ https://user-images.githubusercontent.com/50261190/159541269-b5b75fde-4541-4e84-
 
 ## 4. Como Implementar um novo Personagem
 
-Para construir um novo pensonagem basta organizar dentro da seguinte estrutura
+Para construir um Simples pensonagem basta organizar dentro da seguinte estrutura
 
 
 
         extends "res://Scripts/generics/mecanica.gd"
         func Main():
-                ACELERACAO = ValorNumerico
-                VEL_MAXIMA = ValorNumerico
-                VEL_MINIMA = ValorNumerico
-                GRAVIDADE = ValorNumerico(Negativo)
-                UP = Vector2(direcional para Teto)
-                direcao_entrada.x = ValorNumerico(Entre 1 e -1)
-                direcao_visao_direita = Boolean(True esquerda || false direita)
-
-
+        
+                velocityMin = Int or Float
+                GRAVITY = Int or Float negative
+                UP = Vector2(0,-1)
+                jumpingForce = Int or Float
+                
                 pass
 
         func On_Input_Event():
@@ -49,17 +46,46 @@ Para construir um novo pensonagem basta organizar dentro da seguinte estrutura
 
         func animation():
 
-
                 Aqui você vai produzir suas regras de animação
 
                 pass
                 
 
-Existe algumas funcionalidades internas que podem ser chamadas como:
+## Funcionalidades Extras
 
-- status => vai te retornar o status do player entre ("Parado", "Andando", "Pulando", "Caindo")
-- chao => vai te retornar se o player está no chão ou não
-- permissao_segundo_pulo => caso esteja em True o player tem permissão de dar pulo duplo
+**MAIN:**
+
+Essas funcionalidades são habilitadas no momento que inseridas suas variaveis na função main
+
+***interpolação Linear***
+- *acceleration* (se usado um valor maior que zero, o personagem vai se mover com uma aceleração)
+- *slowdown*     (se a acceleration for usada, o slowdown também tem que ser incluida)
+- *velocityMax*  (se a acceleration for usada, o velocityMax também tem que ser incluida)
+
+
+***Segundo pulo no ar***
+- *secondJumpingForce* (valor usado para caso seja habilitado a função de segundo pulo no ar)  
+
+---- 
+
+**Getters and Setters:**
+
+- *getStatus()*  (te retorna o status atual do personagem)
+- *getFloor()*   (te retorna se o personagem está colidindo com o chão)
+- *getBeFloor()* (Essa função ela funciona como um status anterior ao Floor, ou seja se anteriormente ele já estava no chão)
+- *setStatusSecondJump(boolean)* (aqui você altera o status do segundo pulo, ou seja, se ele já deu o segundo pulo ou não)
+- *getStatusSecondJump()* (aqui você recebe o status do segundo pulo)
+- *setTargetVelocity(int||float)* (aqui você altera o valor alvo só utilizado na movimentação com interpolação Linear)
+----
+
+**Também exite permissões que podem ser alteradas no Inpector dos personagems**
+
+
+![permission](https://user-images.githubusercontent.com/50261190/160908264-cc7875eb-e532-4728-8a02-0013b8fd1e36.png)
+-----
+- *Vision Dir*             (caso o seu personagem está flipando a arte para o lado errado, ative essa funcionalidade)
+- *Permission Auto Flip*   (Ao ativar essa permissão o codigo vai flipar automaticamente as artes para você)
+- *Permission Second Jump* (Ao ativar essa permissão seu personagem habilida a funcionalidade de segundo pulo)
 
 
 ## 5. Arte:
