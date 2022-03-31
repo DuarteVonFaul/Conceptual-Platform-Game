@@ -94,4 +94,4 @@ As artes usadas podem ser facilmente encontradas no [Link do Artista](https://op
 
 ## 6. Autores:
   
-- **Guilherme Duarte Sousa** - [Linkedin](https://www.linkedin.com/in/guilherme-duarte-sousa-53639822b/) | [Github](https://github.com/DuarteVonFaul/) | [Facebook](https://www.facebook.com/DuarteVonFaul/)
+- **Guilherme Duarte Sousa** - [Linkedin](https://www.linkedin.com/in/guilherme-duarte-sousa-53639822b/) | [Github](https://github.com/DuarteVonFaul/) | [Facebook](https://www.facebook.com/DuarteVonFaul/) | [Youtube](https://www.youtube.com/channel/UCoI6Yibnmjl7Z89E9bnIEoA)
