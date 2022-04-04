@@ -1,15 +1,15 @@
 extends "res://Scripts/generics/mecanica.gd"
 
-var animList = ["walk", "Idle", "jump_down", "jump_up"]
+var animList = ["walk", "Idle", "damage", "jump_up"]
 
 # Called when the node enters the scene tree for the first time.
 
 func Main():
 	add_to_group("Player")
-	acceleration = 400
-	slowdown = 300
-	velocityMax = 300
-	velocityMin = 100
+	acceleration = 200
+	slowdown = 100
+	velocityMax = 140
+	velocityMin = 70
 	GRAVITY = -2000
 	jumpingForce = 700
 	secondJumpingForce = 700
@@ -35,7 +35,7 @@ func On_Input_Event():
 	##	direcao_entrada.x = 0
 	##	pass
 	
-	entryDir.y = - float(Input.is_action_pressed("ui_up"))
+	entryDir.y = - float(Input.is_action_just_pressed("ui_up"))
 	
 	#if Input.is_action_pressed("ui_up"):
 	#	direcao_entrada.y = -1
@@ -68,7 +68,7 @@ func animation():
 		anim = animList[3]
 		pass
 	elif getStatus() == statusList[3]:
-		anim = animList[2]
+		anim = animList[3]
 		pass
 	
 	if anim != currentAnim:

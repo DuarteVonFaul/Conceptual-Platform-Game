@@ -21,6 +21,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
+resource_name = "damage"
 tracks/0/type = "value"
 tracks/0/path = NodePath("body:region_rect")
 tracks/0/interp = 1
@@ -32,6 +33,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Rect2( 64, 32, 32, 32 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.112656, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -106,12 +119,12 @@ shape = SubResource( 1 )
 position = Vector2( 0, -16 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 32, 32, 32, 32 )
+region_rect = Rect2( 64, 32, 32, 32 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
 anims/Idle = SubResource( 2 )
-anims/jump_down = SubResource( 3 )
+anims/damage = SubResource( 3 )
 anims/jump_up = SubResource( 4 )
 anims/walk = SubResource( 5 )
 

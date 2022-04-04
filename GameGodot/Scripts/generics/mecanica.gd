@@ -15,7 +15,7 @@ export var permissionSecondJump = false
 export var permissionAutoFlip = true
 
 #Variaveis de controle de Direção e movimento
-var velocity = 0
+var velocity = 0.0
 var targetVelocity = 0
 var entryDir = Vector2()
 var currentDir = Vector2()
@@ -67,7 +67,9 @@ func move_x(delta):
 		velocity = currentDir.x * velocityMin
 	else:
 		if entryDir.x != 0:
-			currentDir.x = entryDir.x
+			if entryDir.x * velocity > 0:
+				currentDir.x = entryDir.x
+	
 			if targetVelocity != velocityMax:
 				targetVelocity = velocityMax
 		else:
@@ -87,8 +89,9 @@ func move_y():
 	
 	if entryDir.y == -1 and Floor:
 		jump(jumpingForce)
-	elif entryDir.y == -1 and permissionSecondJump == true:
-		if statusSecondJump == false:
+	elif permissionSecondJump == true and entryDir.y == -1:
+		if statusSecondJump == false :
+			print(gravity)
 			jump(secondJumpingForce)
 			statusSecondJump = true
 	pass
@@ -118,12 +121,12 @@ func interpolacaoLinear(currentVelocity, targetVelocity, variation):
 
 #Metodo de processo circular/60fps
 func _physics_process(delta):
+	Floor = is_on_floor()
 	
 	On_Input_Event()
 	move_x(delta)
 	move_y()
 	status()
-	Floor = is_on_floor()
 	animation()
 	
 	
